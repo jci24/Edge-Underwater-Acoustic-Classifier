@@ -127,7 +127,10 @@ class SmallCnn(nn.Module):
                 f"Expected input shape [batch, {self.config.input_shape}], "
                 f"received {tuple(features.shape)}."
             )
-        if not torch.isfinite(features).all():
+        if (
+            not torch.compiler.is_exporting()
+            and not torch.isfinite(features).all()
+        ):
             raise ValueError("CNN input contains NaN or infinite values.")
 
     def extract_embedding(self, features: Tensor) -> Tensor:

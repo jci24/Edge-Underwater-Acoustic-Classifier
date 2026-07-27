@@ -1,0 +1,25 @@
+{
+  "source_checkpoint": "artifacts/models/imbalance/class_vessel_balanced_sampling.pt",
+  "source_checkpoint_sha256": "5d2b629284c88a17e1a2753f032c3596ab4ee3182c0279241acbc287c1f29787",
+  "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+  "model_config_hash": "fe3fa0ec6d4ab4bdf8bb33242147c2547dcc59c7f9525d2f700881900b5ebf22",
+  "training_config_hash": "fc70fa97ad9017c9013c0a853d00430259d366fdb4824322c286a5a2d0c5bfad",
+  "selected_run_config_hash": "f845cc556495364c85b79c8790c569b5680fee8eba3991016a653d1ac788c83c",
+  "normalization": "per_example",
+  "input_shape": [
+    1,
+    1,
+    64,
+    155
+  ],
+  "batch_size": 1,
+  "warmup_calls": 50,
+  "measured_calls": 1000,
+  "cold_start_runs": 20,
+  "primary_threads": 1,
+  "onnx_opset": 18,
+  "onnx_size_target_bytes": 5000000,
+  "inference_p99_target_ms": 50.0,
+  "full_pipeline_p99_target_ms": 500.0,
+  "config_hash": "6f4712a0a86c874cebd535b2e04107352a34e0e46ba36bdd1aba44f4900388f6"
+}

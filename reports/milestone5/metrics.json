@@ -1,0 +1,339 @@
+{
+  "benchmark_config_hash": "6f4712a0a86c874cebd535b2e04107352a34e0e46ba36bdd1aba44f4900388f6",
+  "selected_strategy": "class_vessel_balanced_sampling",
+  "normalization": "per_example",
+  "batch_size": 1,
+  "model": {
+    "parameter_count": 23668,
+    "source_checkpoint": "artifacts/models/imbalance/class_vessel_balanced_sampling.pt",
+    "source_checkpoint_sha256": "5d2b629284c88a17e1a2753f032c3596ab4ee3182c0279241acbc287c1f29787",
+    "pytorch_path": "artifacts/models/edge/selected_cnn_state_dict.pt",
+    "pytorch_size_bytes": 103367,
+    "pytorch_sha256": "c04aca0e92ae35509f52ab5402ca20c46abd0dd6e5671efa2a8fc0031c302d97",
+    "onnx_path": "artifacts/models/edge/selected_cnn.onnx",
+    "onnx_size_bytes": 116187,
+    "onnx_sha256": "36a5212460ebdc976bf91dec5632b89e75b06260cb6debbce265de5579375034",
+    "onnx_opset": 18,
+    "onnx_external_data": false,
+    "input_name": "features",
+    "output_name": "logits",
+    "input_shape": [
+      1,
+      1,
+      64,
+      155
+    ],
+    "output_shape": [
+      1,
+      4
+    ]
+  },
+  "parity": {
+    "window_count": 135,
+    "maximum_absolute_error": 9.5367431640625e-07,
+    "absolute_tolerance": 0.0001,
+    "relative_tolerance": 0.0001,
+    "matching_prediction_count": 135,
+    "all_predictions_match": true
+  },
+  "computation": {
+    "multiply_accumulates": 23989504,
+    "approximate_flops": 47979008,
+    "layer:blocks.0.0": 1428480,
+    "layer:blocks.1.0": 11354112,
+    "layer:blocks.2.0": 11206656,
+    "layer:head.2": 256
+  },
+  "steady_state": [
+    {
+      "operation": "dsp_preprocessing",
+      "runtime": "pytorch_dsp",
+      "thread_policy": "single_thread",
+      "configured_threads": 1,
+      "includes_decoding": false,
+      "call_count": 1000,
+      "median_ms": 3.6736250000000004,
+      "p95_ms": 4.530147249999999,
+      "p99_ms": 7.2457825,
+      "total_seconds": 3.8167864600000003
+    },
+    {
+      "operation": "model_inference",
+      "runtime": "pytorch",
+      "thread_policy": "single_thread",
+      "configured_threads": 1,
+      "includes_decoding": false,
+      "call_count": 1000,
+      "median_ms": 1.0895625,
+      "p95_ms": 1.2715402499999997,
+      "p99_ms": 1.38742458,
+      "total_seconds": 1.1209498919999998
+    },
+    {
+      "operation": "model_inference",
+      "runtime": "onnxruntime",
+      "thread_policy": "single_thread",
+      "configured_threads": 1,
+      "includes_decoding": false,
+      "call_count": 1000,
+      "median_ms": 0.882416,
+      "p95_ms": 0.9590645999999997,
+      "p99_ms": 1.07045075,
+      "total_seconds": 0.892206801
+    },
+    {
+      "operation": "model_inference",
+      "runtime": "pytorch",
+      "thread_policy": "runtime_default",
+      "configured_threads": 4,
+      "includes_decoding": false,
+      "call_count": 1000,
+      "median_ms": 0.838479,
+      "p95_ms": 1.0111416500000001,
+      "p99_ms": 1.2097639299999998,
+      "total_seconds": 0.824907
+    },
+    {
+      "operation": "model_inference",
+      "runtime": "onnxruntime",
+      "thread_policy": "runtime_default",
+      "configured_threads": 0,
+      "includes_decoding": false,
+      "call_count": 1000,
+      "median_ms": 0.36816649999999995,
+      "p95_ms": 0.5536871499999998,
+      "p99_ms": 0.6932955,
+      "total_seconds": 0.39454452
+    },
+    {
+      "operation": "compute_pipeline",
+      "runtime": "pytorch",
+      "thread_policy": "single_thread",
+      "configured_threads": 1,
+      "includes_decoding": false,
+      "call_count": 1000,
+      "median_ms": 4.745479,
+      "p95_ms": 5.37200625,
+      "p99_ms": 5.78901125,
+      "total_seconds": 4.837099199
+    },
+    {
+      "operation": "compute_pipeline",
+      "runtime": "onnxruntime",
+      "thread_policy": "single_thread",
+      "configured_threads": 1,
+      "includes_decoding": false,
+      "call_count": 1000,
+      "median_ms": 4.492292,
+      "p95_ms": 5.032956550000001,
+      "p99_ms": 5.915069249999999,
+      "total_seconds": 4.60684421
+    },
+    {
+      "operation": "full_product_pipeline",
+      "runtime": "pytorch",
+      "thread_policy": "single_thread",
+      "configured_threads": 1,
+      "includes_decoding": true,
+      "call_count": 1000,
+      "median_ms": 6.9539165,
+      "p95_ms": 10.5579917,
+      "p99_ms": 12.076372499999994,
+      "total_seconds": 7.327290270000001
+    },
+    {
+      "operation": "full_product_pipeline",
+      "runtime": "onnxruntime",
+      "thread_policy": "single_thread",
+      "configured_threads": 1,
+      "includes_decoding": true,
+      "call_count": 1000,
+      "median_ms": 6.7028545,
+      "p95_ms": 10.63026695,
+      "p99_ms": 13.194642079999998,
+      "total_seconds": 7.187485703
+    }
+  ],
+  "cold_start": [
+    {
+      "runtime": "pytorch",
+      "run_count": 20,
+      "startup_import_ms": {
+        "median": 1018.9170005,
+        "p95": 1429.0172723000005,
+        "p99": 2084.0324880599987,
+        "maximum": 2247.786292
+      },
+      "load_ms": {
+        "median": 2.934958,
+        "p95": 4.343201750000003,
+        "p99": 7.728906749999995,
+        "maximum": 8.575333
+      },
+      "first_inference_ms": {
+        "median": 1.8065415,
+        "p95": 2.41071105,
+        "p99": 2.5247422099999994,
+        "maximum": 2.55325
+      },
+      "first_full_pipeline_ms": {
+        "median": 6.888979,
+        "p95": 8.5876521,
+        "p99": 8.62036402,
+        "maximum": 8.628542
+      },
+      "process_total_ms": {
+        "median": 1325.3265415,
+        "p95": 1797.8443309500008,
+        "p99": 2523.3839997899986,
+        "maximum": 2704.768917
+      },
+      "baseline_rss_bytes": {
+        "median": 307806208.0,
+        "p95": 308088832.0,
+        "p99": 308151091.2,
+        "maximum": 308166656.0
+      },
+      "load_rss_increase_bytes": {
+        "median": 1523712.0,
+        "p95": 1760460.8,
+        "p99": 1872527.3599999999,
+        "maximum": 1900544.0
+      },
+      "full_pipeline_rss_increase_bytes": {
+        "median": 22921216.0,
+        "p95": 23113728.0,
+        "p99": 24545689.599999998,
+        "maximum": 24903680.0
+      },
+      "peak_rss_bytes": {
+        "median": 330407936.0,
+        "p95": 331060838.4,
+        "p99": 331148001.28,
+        "maximum": 331169792.0
+      }
+    },
+    {
+      "runtime": "onnxruntime",
+      "run_count": 20,
+      "startup_import_ms": {
+        "median": 1111.906813,
+        "p95": 2044.2411750000008,
+        "p99": 2988.426034999998,
+        "maximum": 3224.47225
+      },
+      "load_ms": {
+        "median": 17.7137915,
+        "p95": 34.979324350000084,
+        "p99": 126.00693126999985,
+        "maximum": 148.763833
+      },
+      "first_inference_ms": {
+        "median": 1.0440835,
+        "p95": 6.153748250000001,
+        "p99": 7.161983249999999,
+        "maximum": 7.414042
+      },
+      "first_full_pipeline_ms": {
+        "median": 7.2678329999999995,
+        "p95": 14.156072950000057,
+        "p99": 75.4701817899999,
+        "maximum": 90.798709
+      },
+      "process_total_ms": {
+        "median": 1528.9105005000001,
+        "p95": 2384.386314550001,
+        "p99": 3505.524095709998,
+        "maximum": 3785.808541
+      },
+      "baseline_rss_bytes": {
+        "median": 288759808.0,
+        "p95": 308070809.6,
+        "p99": 308108165.12,
+        "maximum": 308117504.0
+      },
+      "load_rss_increase_bytes": {
+        "median": 19554304.0,
+        "p95": 20037632.0,
+        "p99": 20037632.0,
+        "maximum": 20037632.0
+      },
+      "full_pipeline_rss_increase_bytes": {
+        "median": 41705472.0,
+        "p95": 43519180.8,
+        "p99": 43568988.16,
+        "maximum": 43581440.0
+      },
+      "peak_rss_bytes": {
+        "median": 328146944.0,
+        "p95": 349799219.2,
+        "p99": 349811671.04,
+        "maximum": 349814784.0
+      }
+    }
+  ],
+  "targets": {
+    "onnx_file_size": {
+      "observed": 116187,
+      "limit": 5000000,
+      "unit": "bytes",
+      "passed": true
+    },
+    "onnx_single_thread_inference_p99": {
+      "observed": 1.07045075,
+      "limit": 50.0,
+      "unit": "ms",
+      "passed": true
+    },
+    "onnx_full_pipeline_p99": {
+      "observed": 13.194642079999998,
+      "limit": 500.0,
+      "unit": "ms",
+      "passed": true
+    }
+  },
+  "environment": {
+    "hardware": {
+      "machine_name": "MacBook Air",
+      "chip": "Apple M2",
+      "memory": "8 GB"
+    },
+    "architecture": "arm64",
+    "logical_cpu_count": 8,
+    "physical_cpu_count": 8,
+    "total_memory_bytes": 8589934592,
+    "operating_system": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.6",
+    "versions": {
+      "numpy": "2.5.1",
+      "torch": "2.10.0",
+      "torchaudio": "2.10.0",
+      "torchcodec": "0.10.0",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.27.0",
+      "onnxscript": "0.7.1",
+      "psutil": "7.2.2"
+    },
+    "pytorch": {
+      "primary_intra_op_threads": 1,
+      "default_intra_op_threads": 4
+    },
+    "onnxruntime": {
+      "providers": [
+        "CPUExecutionProvider"
+      ],
+      "primary_intra_op_threads": 1,
+      "default_intra_op_threads": 0,
+      "execution_mode": "sequential",
+      "graph_optimization": "ORT_ENABLE_ALL"
+    }
+  },
+  "measurement_boundaries": {
+    "dsp_preprocessing": "Decoded waveform to per-example normalized log-mel; no decoding or disk I/O.",
+    "model_inference": "Prepared [1,1,64,155] tensor to four logits.",
+    "compute_pipeline": "Decoded waveform to four logits; no decoding or disk I/O.",
+    "full_product_pipeline": "Warm-cache source interval decoding, preprocessing, and four logits.",
+    "cold_start": "Fresh process startup/import, runtime load, first inference, and first full pipeline."
+  },
+  "classification_limit": "Edge performance does not repair the selected model's weak reused-test classification score from Milestone 4."
+}

@@ -182,6 +182,23 @@ compares confidence and embedding-distance rejection. Unknown detection is not
 claimed because no unknown/background set exists. See
 [the Milestone 4 specification](docs/imbalance_label_risk.md).
 
+## Edge-performance evaluation
+
+Install the edge extras, benchmark the unchanged Milestone 4 selected CNN, and
+validate the export and measurements:
+
+```bash
+python3 -m pip install -e '.[edge,test]'
+MPLBACKEND=Agg python3 scripts/benchmark_edge_performance.py
+python3 scripts/validate_edge_performance.py
+```
+
+Single-threaded ONNX Runtime is the primary deployment condition; PyTorch
+eager and runtime-default thread counts are reported as references. Generated
+PyTorch and ONNX model files remain ignored, while raw measurements, memory
+evidence, plots, metrics, and the report are versioned. See
+[the edge-performance procedure](docs/edge_performance.md).
+
 ## Dataset access and interpretation
 
 The upstream metafiles do not provide column headers. This project uses only
