@@ -1,0 +1,310 @@
+{
+  "primary_metric": "test window-level macro F1",
+  "primary_run": "per_example_weighted",
+  "primary_normalization": "per_example",
+  "primary_class_weighted": true,
+  "test_evaluated_runs": [
+    "per_example_weighted"
+  ],
+  "runs": [
+    {
+      "name": "training_stats_unweighted",
+      "normalization": "training_stats",
+      "class_weighted": false,
+      "best_epoch": 28,
+      "epochs_completed": 36,
+      "best_validation_macro_f1": 0.27921271016269755,
+      "stopped_early": true,
+      "checkpoint": "artifacts/models/cnn/training_stats_unweighted.pt",
+      "run_config_hash": "4c75371c38dc775e85c7ae1849f476a0008ac19f038fc8daa3539ae36db6bc79"
+    },
+    {
+      "name": "per_example_unweighted",
+      "normalization": "per_example",
+      "class_weighted": false,
+      "best_epoch": 8,
+      "epochs_completed": 16,
+      "best_validation_macro_f1": 0.3006289308176101,
+      "stopped_early": true,
+      "checkpoint": "artifacts/models/cnn/per_example_unweighted.pt",
+      "run_config_hash": "bb47b0a6c7d8064ab237705c2a807cb417c87513b9f58edbb0baffbb08bd998a"
+    },
+    {
+      "name": "per_example_weighted",
+      "normalization": "per_example",
+      "class_weighted": true,
+      "best_epoch": 2,
+      "epochs_completed": 10,
+      "best_validation_macro_f1": 0.3250272331154684,
+      "stopped_early": true,
+      "checkpoint": "artifacts/models/cnn/per_example_weighted.pt",
+      "run_config_hash": "c3c1b2cf0ef9d236ed20736c8e8949e25cd5866bc34516aad2a1b644096d90a3"
+    }
+  ],
+  "primary_test": {
+    "window": {
+      "macro_f1": 0.12618787973204548,
+      "accuracy": 0.13333333333333333,
+      "per_class": {
+        "Cargo": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 37
+        },
+        "Passengership": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 45
+        },
+        "Tanker": {
+          "precision": 0.07627118644067797,
+          "recall": 0.6923076923076923,
+          "f1": 0.13740458015267176,
+          "support": 13
+        },
+        "Tug": {
+          "precision": 1.0,
+          "recall": 0.225,
+          "f1": 0.3673469387755102,
+          "support": 40
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          37,
+          0
+        ],
+        [
+          1,
+          0,
+          44,
+          0
+        ],
+        [
+          4,
+          0,
+          9,
+          0
+        ],
+        [
+          3,
+          0,
+          28,
+          9
+        ]
+      ]
+    },
+    "source_secondary": {
+      "macro_f1": 0.05555555555555555,
+      "accuracy": 0.125,
+      "per_class": {
+        "Cargo": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1
+        },
+        "Passengership": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 3
+        },
+        "Tanker": {
+          "precision": 0.16666666666666666,
+          "recall": 0.3333333333333333,
+          "f1": 0.2222222222222222,
+          "support": 3
+        },
+        "Tug": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0
+        ]
+      ]
+    }
+  },
+  "baseline_comparison": {
+    "logistic_regression": {
+      "macro_f1": 0.28320179889009983,
+      "accuracy": 0.3925925925925926
+    },
+    "random_forest": {
+      "macro_f1": 0.16660161332292478,
+      "accuracy": 0.1925925925925926
+    }
+  },
+  "support_by_split": [
+    {
+      "split": "test",
+      "class": "Cargo",
+      "windows": 37,
+      "source_files": 1,
+      "vessel_groups": 1
+    },
+    {
+      "split": "test",
+      "class": "Passengership",
+      "windows": 45,
+      "source_files": 3,
+      "vessel_groups": 1
+    },
+    {
+      "split": "test",
+      "class": "Tanker",
+      "windows": 13,
+      "source_files": 3,
+      "vessel_groups": 3
+    },
+    {
+      "split": "test",
+      "class": "Tug",
+      "windows": 40,
+      "source_files": 1,
+      "vessel_groups": 1
+    },
+    {
+      "split": "train",
+      "class": "Cargo",
+      "windows": 345,
+      "source_files": 9,
+      "vessel_groups": 7
+    },
+    {
+      "split": "train",
+      "class": "Passengership",
+      "windows": 167,
+      "source_files": 15,
+      "vessel_groups": 8
+    },
+    {
+      "split": "train",
+      "class": "Tanker",
+      "windows": 279,
+      "source_files": 22,
+      "vessel_groups": 13
+    },
+    {
+      "split": "train",
+      "class": "Tug",
+      "windows": 38,
+      "source_files": 1,
+      "vessel_groups": 1
+    },
+    {
+      "split": "validation",
+      "class": "Cargo",
+      "windows": 77,
+      "source_files": 2,
+      "vessel_groups": 2
+    },
+    {
+      "split": "validation",
+      "class": "Passengership",
+      "windows": 9,
+      "source_files": 2,
+      "vessel_groups": 2
+    },
+    {
+      "split": "validation",
+      "class": "Tanker",
+      "windows": 28,
+      "source_files": 3,
+      "vessel_groups": 3
+    },
+    {
+      "split": "validation",
+      "class": "Tug",
+      "windows": 40,
+      "source_files": 1,
+      "vessel_groups": 1
+    }
+  ],
+  "model": {
+    "parameter_count": 23668,
+    "state_dict_size_bytes": 102375,
+    "checkpoint_size_bytes": 304899,
+    "model_config_hash": "fe3fa0ec6d4ab4bdf8bb33242147c2547dcc59c7f9525d2f700881900b5ebf22",
+    "training_config_hash": "fc70fa97ad9017c9013c0a853d00430259d366fdb4824322c286a5a2d0c5bfad",
+    "primary_run_config_hash": "c3c1b2cf0ef9d236ed20736c8e8949e25cd5866bc34516aad2a1b644096d90a3"
+  },
+  "preload": {
+    "window_count": 1118,
+    "memory_bytes": 44362240,
+    "elapsed_seconds": 5.41348604200175,
+    "persistent_tensor_cache": false
+  },
+  "timing": {
+    "measurement_note": "Warm-cache development-Mac CPU measurements, one PyTorch thread, batch size one; not target-edge-device performance.",
+    "preprocessing": {
+      "median_ms": 5.830542009789497,
+      "p95_ms": 11.972696403972805,
+      "total_seconds": 0.8663372560986318,
+      "call_count": 135
+    },
+    "inference": {
+      "median_ms": 1.132520497776568,
+      "p95_ms": 1.2365902861347422,
+      "total_seconds": 1.166711462487001,
+      "call_count": 1000
+    },
+    "end_to_end": {
+      "median_ms": 5.6494169984944165,
+      "p95_ms": 8.234866795828566,
+      "total_seconds": 0.7924037446500733,
+      "call_count": 135
+    },
+    "thread_count": 1,
+    "previous_training_thread_count": 4
+  },
+  "error_review": {
+    "status": "pending_manual_listening",
+    "selected_error_count": 20
+  },
+  "environment": {
+    "python": "3.14.6",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "processor": "arm",
+    "numpy": "2.5.1",
+    "scikit_learn": "1.9.0",
+    "torch": "2.10.0",
+    "training_device": "cpu"
+  },
+  "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+  "reporting_limits": [
+    "Windows within recordings and vessels are correlated.",
+    "The public test split has one Cargo, Passengership, and Tug vessel group.",
+    "Results do not generalize to the full 47-hour DeepShip dataset."
+  ]
+}

@@ -145,6 +145,24 @@ feature-extraction, classifier-inference, end-to-end latency, and model-size
 measurements. See
 [the baseline specification and limits](docs/handcrafted_baseline.md).
 
+## Small CNN baseline
+
+Train the three controlled compact-CNN runs, create the non-overwriting manual
+error-review pack, and validate the experiment:
+
+```bash
+MPLBACKEND=Agg python3 scripts/train_cnn_baseline.py
+python3 scripts/create_cnn_error_review.py
+python3 scripts/validate_cnn_baseline.py
+python3 scripts/validate_cnn_error_review.py
+```
+
+The validation-selected CNN alone is evaluated on the unchanged test split and
+compared with the committed feature baselines. Model checkpoints stay ignored;
+configurations, histories, learning curves, predictions, latency, and metrics
+are versioned. The generated 20-error listening pack still requires human
+annotation. See [the CNN specification](docs/cnn_baseline.md).
+
 ## Dataset access and interpretation
 
 The upstream metafiles do not provide column headers. This project uses only

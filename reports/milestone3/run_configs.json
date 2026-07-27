@@ -1,0 +1,38 @@
+[
+  {
+    "name": "training_stats_unweighted",
+    "normalization": "training_stats",
+    "class_weighted": false,
+    "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+    "model_config_hash": "fe3fa0ec6d4ab4bdf8bb33242147c2547dcc59c7f9525d2f700881900b5ebf22",
+    "training_config_hash": "fc70fa97ad9017c9013c0a853d00430259d366fdb4824322c286a5a2d0c5bfad",
+    "config_hash": "4c75371c38dc775e85c7ae1849f476a0008ac19f038fc8daa3539ae36db6bc79",
+    "best_epoch": 28,
+    "best_validation_macro_f1": 0.27921271016269755,
+    "stopped_early": true
+  },
+  {
+    "name": "per_example_unweighted",
+    "normalization": "per_example",
+    "class_weighted": false,
+    "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+    "model_config_hash": "fe3fa0ec6d4ab4bdf8bb33242147c2547dcc59c7f9525d2f700881900b5ebf22",
+    "training_config_hash": "fc70fa97ad9017c9013c0a853d00430259d366fdb4824322c286a5a2d0c5bfad",
+    "config_hash": "bb47b0a6c7d8064ab237705c2a807cb417c87513b9f58edbb0baffbb08bd998a",
+    "best_epoch": 8,
+    "best_validation_macro_f1": 0.3006289308176101,
+    "stopped_early": true
+  },
+  {
+    "name": "per_example_weighted",
+    "normalization": "per_example",
+    "class_weighted": true,
+    "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+    "model_config_hash": "fe3fa0ec6d4ab4bdf8bb33242147c2547dcc59c7f9525d2f700881900b5ebf22",
+    "training_config_hash": "fc70fa97ad9017c9013c0a853d00430259d366fdb4824322c286a5a2d0c5bfad",
+    "config_hash": "c3c1b2cf0ef9d236ed20736c8e8949e25cd5866bc34516aad2a1b644096d90a3",
+    "best_epoch": 2,
+    "best_validation_macro_f1": 0.3250272331154684,
+    "stopped_early": true
+  }
+]

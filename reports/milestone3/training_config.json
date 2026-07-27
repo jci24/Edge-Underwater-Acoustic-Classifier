@@ -1,0 +1,11 @@
+{
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "maximum_epochs": 50,
+  "patience": 8,
+  "minimum_f1_improvement": 0.0001,
+  "seed": 42,
+  "num_workers": 0,
+  "config_hash": "fc70fa97ad9017c9013c0a853d00430259d366fdb4824322c286a5a2d0c5bfad"
+}
