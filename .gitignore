@@ -1,0 +1,6 @@
+# Downloaded datasets are reproducible and too large for Git.
+data/raw/
+
+# Python runtime artifacts.
+__pycache__/
+*.py[cod]
