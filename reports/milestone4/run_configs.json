@@ -1,0 +1,59 @@
+[
+  {
+    "name": "unweighted",
+    "strategy": "unweighted",
+    "normalization": "per_example",
+    "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+    "model_config_hash": "fe3fa0ec6d4ab4bdf8bb33242147c2547dcc59c7f9525d2f700881900b5ebf22",
+    "training_config_hash": "fc70fa97ad9017c9013c0a853d00430259d366fdb4824322c286a5a2d0c5bfad",
+    "config_hash": "6750af2ae562337642f7f9c13ff482794229dde4c5b68e620838223e591c85b4",
+    "best_epoch": 8,
+    "epochs_completed": 16,
+    "best_validation_macro_f1": 0.3006289308176101,
+    "validation_per_class_recall": {
+      "Cargo": 0.4155844155844156,
+      "Passengership": 0.6666666666666666,
+      "Tanker": 0.0,
+      "Tug": 0.0
+    },
+    "checkpoint": "artifacts/models/imbalance/unweighted.pt"
+  },
+  {
+    "name": "class_weighted",
+    "strategy": "class_weighted",
+    "normalization": "per_example",
+    "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+    "model_config_hash": "fe3fa0ec6d4ab4bdf8bb33242147c2547dcc59c7f9525d2f700881900b5ebf22",
+    "training_config_hash": "fc70fa97ad9017c9013c0a853d00430259d366fdb4824322c286a5a2d0c5bfad",
+    "config_hash": "0da7f09afc28d357347a608ae31cf94eacccc2f6f9fe565745165ca50861a339",
+    "best_epoch": 2,
+    "epochs_completed": 10,
+    "best_validation_macro_f1": 0.3250272331154684,
+    "validation_per_class_recall": {
+      "Cargo": 0.19480519480519481,
+      "Passengership": 0.2222222222222222,
+      "Tanker": 0.0,
+      "Tug": 0.825
+    },
+    "checkpoint": "artifacts/models/imbalance/class_weighted.pt"
+  },
+  {
+    "name": "class_vessel_balanced_sampling",
+    "strategy": "class_vessel_balanced_sampling",
+    "normalization": "per_example",
+    "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+    "model_config_hash": "fe3fa0ec6d4ab4bdf8bb33242147c2547dcc59c7f9525d2f700881900b5ebf22",
+    "training_config_hash": "fc70fa97ad9017c9013c0a853d00430259d366fdb4824322c286a5a2d0c5bfad",
+    "config_hash": "f845cc556495364c85b79c8790c569b5680fee8eba3991016a653d1ac788c83c",
+    "best_epoch": 5,
+    "epochs_completed": 13,
+    "best_validation_macro_f1": 0.3960169418085705,
+    "validation_per_class_recall": {
+      "Cargo": 0.6363636363636364,
+      "Passengership": 0.3333333333333333,
+      "Tanker": 0.21428571428571427,
+      "Tug": 0.2
+    },
+    "checkpoint": "artifacts/models/imbalance/class_vessel_balanced_sampling.pt"
+  }
+]

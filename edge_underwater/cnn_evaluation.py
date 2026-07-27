@@ -50,13 +50,16 @@ def evaluate_cnn(
     model: SmallCnn,
     dataset: Dataset,
     batch_size: int = 32,
+    include_embeddings: bool = False,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     model.eval()
     loader = DataLoader(dataset, batch_size=batch_size, shuffle=False, num_workers=0)
     rows = []
     with torch.inference_mode():
         for batch in loader:
-            logits = model(batch["features"].to(torch.float32))
+            features = batch["features"].to(torch.float32)
+            embeddings = model.extract_embedding(features)
+            logits = model.head(embeddings)
             probabilities = torch.softmax(logits, dim=1).cpu().numpy()
             if not np.isfinite(probabilities).all():
                 raise ValueError("CNN probabilities contain NaN or infinite values.")
@@ -81,6 +84,9 @@ def evaluate_cnn(
                     row[f"probability_{class_name}"] = float(
                         probabilities[index, class_index]
                     )
+                if include_embeddings:
+                    for embedding_index, value in enumerate(embeddings[index]):
+                        row[f"embedding_{embedding_index}"] = float(value)
                 rows.append(row)
     output = pd.DataFrame(rows)
     metrics = classification_metrics(

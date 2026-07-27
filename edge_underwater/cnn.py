@@ -119,7 +119,7 @@ class SmallCnn(nn.Module):
             nn.Linear(self.config.convolution_channels[-1], self.config.class_count),
         )
 
-    def forward(self, features: Tensor) -> Tensor:
+    def _validate_features(self, features: Tensor) -> None:
         if features.ndim != 4:
             raise ValueError("CNN input must have shape [batch, channel, mel, frame].")
         if tuple(features.shape[1:]) != self.config.input_shape:
@@ -129,7 +129,16 @@ class SmallCnn(nn.Module):
             )
         if not torch.isfinite(features).all():
             raise ValueError("CNN input contains NaN or infinite values.")
-        return self.head(self.global_pool(self.blocks(features)))
+
+    def extract_embedding(self, features: Tensor) -> Tensor:
+        """Return the deterministic pooled 64-value representation."""
+
+        self._validate_features(features)
+        pooled = self.global_pool(self.blocks(features))
+        return torch.flatten(pooled, start_dim=1)
+
+    def forward(self, features: Tensor) -> Tensor:
+        return self.head(self.extract_embedding(features))
 
     @property
     def parameter_count(self) -> int:

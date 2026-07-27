@@ -1,0 +1,9 @@
+{
+  "status": "pending_manual_review",
+  "row_count": 48,
+  "vessel_group_count": 43,
+  "completed_count": 0,
+  "complete": false,
+  "disposition_counts": {},
+  "interpretation": "Disposition counts come from human review. Quantitative risk flags were used only to select audit candidates."
+}

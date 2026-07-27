@@ -16,7 +16,7 @@ import torch
 from sklearn.metrics import f1_score
 from torch import Tensor, nn
 from torch.optim import AdamW
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, WeightedRandomSampler
 
 from .cnn import SmallCnn, SmallCnnConfig
 
@@ -88,16 +88,44 @@ def class_weights_from_training_labels(labels: Tensor, class_count: int = 4) -> 
     return labels.numel() / (class_count * counts.to(torch.float32))
 
 
+def make_weighted_sampler(
+    sampling_weights: Tensor,
+    sample_count: int,
+    seed: int,
+) -> WeightedRandomSampler:
+    if sampling_weights.ndim != 1 or len(sampling_weights) != sample_count:
+        raise ValueError("Sampling weights must align with the requested sample count.")
+    if not torch.isfinite(sampling_weights).all() or (sampling_weights <= 0).any():
+        raise ValueError("Sampling weights must be finite and positive.")
+    return WeightedRandomSampler(
+        sampling_weights.to(torch.float64),
+        num_samples=sample_count,
+        replacement=True,
+        generator=torch.Generator().manual_seed(seed),
+    )
+
+
 def _loader(
     dataset: Dataset,
     config: CnnTrainingConfig,
     shuffle: bool,
+    sampling_weights: Tensor | None = None,
 ) -> DataLoader:
     generator = torch.Generator().manual_seed(config.seed)
+    sampler = None
+    if sampling_weights is not None:
+        if shuffle:
+            raise ValueError("Weighted sampling and shuffle cannot both be enabled.")
+        sampler = make_weighted_sampler(
+            sampling_weights,
+            sample_count=len(dataset),
+            seed=config.seed,
+        )
     return DataLoader(
         dataset,
         batch_size=config.batch_size,
-        shuffle=shuffle,
+        shuffle=shuffle if sampler is None else False,
+        sampler=sampler,
         num_workers=config.num_workers,
         generator=generator,
     )
@@ -149,6 +177,7 @@ def train_cnn(
     training_config: CnnTrainingConfig,
     run_config: CnnRunConfig,
     checkpoint_path: Path,
+    sampling_weights: Tensor | None = None,
 ) -> TrainingResult:
     if any(
         str(training_dataset[index]["split"]) != "train"
@@ -163,7 +192,17 @@ def train_cnn(
 
     set_deterministic_seed(training_config.seed)
     model = SmallCnn(model_config)
-    training_loader = _loader(training_dataset, training_config, shuffle=True)
+    if sampling_weights is not None:
+        if len(sampling_weights) != len(training_dataset):
+            raise ValueError("Sampling weights must align with training rows.")
+        if not torch.isfinite(sampling_weights).all() or (sampling_weights <= 0).any():
+            raise ValueError("Sampling weights must be finite and positive.")
+    training_loader = _loader(
+        training_dataset,
+        training_config,
+        shuffle=sampling_weights is None,
+        sampling_weights=sampling_weights,
+    )
     validation_loader = _loader(validation_dataset, training_config, shuffle=False)
     if run_config.class_weighted:
         labels = torch.tensor(

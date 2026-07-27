@@ -1,0 +1,17 @@
+true_class,predicted_class,count
+Cargo,Cargo,0
+Cargo,Passengership,0
+Cargo,Tanker,37
+Cargo,Tug,0
+Passengership,Cargo,0
+Passengership,Passengership,0
+Passengership,Tanker,45
+Passengership,Tug,0
+Tanker,Cargo,4
+Tanker,Passengership,0
+Tanker,Tanker,9
+Tanker,Tug,0
+Tug,Cargo,1
+Tug,Passengership,0
+Tug,Tanker,39
+Tug,Tug,0

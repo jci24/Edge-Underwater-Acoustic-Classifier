@@ -72,6 +72,8 @@ class PreloadedLogMelStore:
                     "start_seconds": item["start_seconds"],
                     "end_seconds": item["end_seconds"],
                     "config_hash": dataset.rows[index]["config_hash"],
+                    "rms": item["rms"],
+                    "low_level": item["low_level"],
                 }
             )
             if progress is not None:

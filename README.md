@@ -163,6 +163,25 @@ configurations, histories, learning curves, predictions, latency, and metrics
 are versioned. The generated 20-error listening pack still requires human
 annotation. See [the CNN specification](docs/cnn_baseline.md).
 
+## Imbalance, rare events, and label risk
+
+Run the controlled imbalance study, generate the 48-window label audit, and
+validate the quantitative artifacts:
+
+```bash
+MPLBACKEND=Agg python3 scripts/train_imbalance_risk.py
+python3 scripts/create_label_audit.py
+python3 scripts/validate_imbalance_risk.py
+python3 scripts/validate_label_audit.py
+python3 scripts/summarize_label_audit.py
+```
+
+The analysis compares unweighted loss, class weighting, and class/vessel-aware
+sampling; evaluates Tug probability as a separate one-vs-rest score; and
+compares confidence and embedding-distance rejection. Unknown detection is not
+claimed because no unknown/background set exists. See
+[the Milestone 4 specification](docs/imbalance_label_risk.md).
+
 ## Dataset access and interpretation
 
 The upstream metafiles do not provide column headers. This project uses only

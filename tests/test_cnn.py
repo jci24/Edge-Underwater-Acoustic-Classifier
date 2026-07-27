@@ -18,6 +18,19 @@ def test_small_cnn_shape_size_and_global_pooling():
     assert torch.isfinite(logits).all()
 
 
+def test_small_cnn_embedding_is_finite_deterministic_and_64_values():
+    model = SmallCnn().eval()
+    features = torch.randn(3, 1, 64, 155)
+
+    with torch.inference_mode():
+        first = model.extract_embedding(features)
+        second = model.extract_embedding(features)
+
+    assert first.shape == (3, 64)
+    assert torch.equal(first, second)
+    assert torch.isfinite(first).all()
+
+
 def test_small_cnn_evaluation_is_deterministic():
     torch.manual_seed(42)
     model = SmallCnn().eval()
