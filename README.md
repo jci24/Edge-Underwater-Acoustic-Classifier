@@ -32,9 +32,8 @@ records the exact upstream commit and blob metadata in
 `data/raw/deepship/source_manifest.json`. The catalogue command creates:
 
 - `data/catalogues/deepship_recordings.csv`: one row per available WAV file,
-  including class, audio properties, SHA-256, and source metadata.
-- `data/catalogues/deepship_summary.json`: counts, sizes, and durations by
-  class, plus the upstream revision.
+  including its class, duration, sample rate, source recording ID, vessel name,
+  and a derived session identifier when date and time metadata are available.
 
 Both commands are safe to rerun. Existing downloads are skipped only when their
 sizes match the upstream manifest. Use `--help` for path and revision options.
