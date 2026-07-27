@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "edge-underwater-acoustic-classifier"
+version = "0.1.0"
+description = "Reproducible preprocessing for edge underwater vessel classification"
+requires-python = ">=3.13"
+dependencies = [
+    "matplotlib>=3.8,<4",
+    "pandas>=2.2,<4",
+    "torch==2.10.0",
+    "torchaudio==2.10.0",
+    "torchcodec==0.10.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[tool.setuptools.packages.find]
+include = ["edge_underwater*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

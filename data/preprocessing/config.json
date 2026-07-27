@@ -1,0 +1,21 @@
+{
+  "sample_rate_hz": 16000,
+  "window_seconds": 5.0,
+  "n_fft": 1024,
+  "win_length": 1024,
+  "hop_length": 512,
+  "mel_bands": 64,
+  "minimum_frequency_hz": 10.0,
+  "maximum_frequency_hz": 8000.0,
+  "power": 2.0,
+  "log_floor": 1e-10,
+  "normalization_epsilon": 1e-06,
+  "low_level_rms": 1e-08,
+  "window_samples": 80000,
+  "output_shape": [
+    1,
+    64,
+    155
+  ],
+  "config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba"
+}

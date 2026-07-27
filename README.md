@@ -98,6 +98,36 @@ Write observations rather than inferred mechanical causes. For example,
 “steady low-frequency tone with intermittent broadband bursts” is appropriate;
 an unsupported diagnosis of a damaged component is not.
 
+## Model preprocessing
+
+Install the project and its test dependencies:
+
+```bash
+python3 -m pip install -e ".[test]"
+```
+
+Build the deterministic five-second window manifest and fit normalization
+statistics using training windows only:
+
+```bash
+python3 scripts/build_window_manifest.py
+python3 scripts/fit_training_statistics.py
+```
+
+Validate every window under both supported normalization modes and create the
+visual comparison:
+
+```bash
+python3 scripts/validate_preprocessing.py
+MPLBACKEND=Agg python3 scripts/inspect_preprocessing.py
+```
+
+The model input is a finite `float32` tensor with shape `[1, 64, 155]`:
+one channel, 64 mel bands, and 155 time frames. The committed manifest traces
+every tensor to its source file and half-open time interval. See
+[the preprocessing specification](docs/preprocessing.md) for the complete
+configuration, split policy, and normalization behavior.
+
 ## Dataset access and interpretation
 
 The upstream metafiles do not provide column headers. This project uses only
