@@ -27,16 +27,15 @@ Catalogue generation requires `ffprobe` (provided by FFmpeg) because the source
 recordings use 32-bit floating-point WAV encoding, which Python's standard
 library WAV reader does not support.
 
-The downloader stores the untracked source files in `data/raw/deepship/` and
-records the exact upstream commit and blob metadata in
-`data/raw/deepship/source_manifest.json`. The catalogue command creates:
+The downloader stores the untracked source files in `data/raw/deepship/`. The
+catalogue command creates:
 
 - `data/catalogues/deepship_recordings.csv`: one row per available WAV file,
   including its class, duration, sample rate, source recording ID, vessel name,
   and a derived session identifier when date and time metadata are available.
 
 Both commands are safe to rerun. Existing downloads are skipped only when their
-sizes match the upstream manifest. Use `--help` for path and revision options.
+sizes match the upstream file list.
 
 ## Dataset access and interpretation
 
