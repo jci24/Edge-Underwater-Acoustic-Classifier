@@ -37,6 +37,17 @@ catalogue command creates:
 Both commands are safe to rerun. Existing downloads are skipped only when their
 sizes match the upstream file list.
 
+Plot the number of files, total duration, and unique vessels in each class:
+
+```bash
+python3 -m pip install pandas matplotlib
+python3 scripts/plot_class_distribution.py
+```
+
+The generated plot is saved to
+`data/plots/deepship_class_distribution.png` and is excluded from Git because
+it can be recreated from the catalogue.
+
 ## Dataset access and interpretation
 
 The upstream metafiles do not provide column headers. This project therefore

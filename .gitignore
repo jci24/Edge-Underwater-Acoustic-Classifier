@@ -1,6 +1,9 @@
 # Downloaded datasets are reproducible and too large for Git.
 data/raw/
 
+# Generated plots can be recreated from the catalogue.
+data/plots/
+
 # Python runtime artifacts.
 __pycache__/
 *.py[cod]
