@@ -4,6 +4,9 @@ data/raw/
 # Generated plots can be recreated from the catalogue.
 data/plots/
 
+# Local Python environments.
+.venv/
+
 # Python runtime artifacts.
 __pycache__/
 *.py[cod]

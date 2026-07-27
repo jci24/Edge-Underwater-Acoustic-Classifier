@@ -1,0 +1,13 @@
+file,class,duration_seconds,vessel_name,noise_present,noise_type,vessel_audibility,ambiguity,confidence,notes
+Cargo/103.wav,Cargo,199.0,SEASPAN SWIFT,,,,,,
+Cargo/78.wav,Cargo,194.0,CMA CGM,,,,,,
+Cargo/96.wav,Cargo,199.0,STAR HARMONIA,,,,,,
+Passengership/27.wav,Passengership,33.0,KENNICOTT,,,,,,
+Passengership/5.wav,Passengership,14.0,RUBY PRINCESS,,,,,,
+Passengership/9.wav,Passengership,11.0,CARNIVAL LEGEND,,,,,,
+Tanker/10.wav,Tanker,30.0,NAVE ORBIT,,,,,,
+Tanker/19.wav,Tanker,14.0,CARIBBEAN SPIRIT,,,,,,
+Tanker/47.wav,Tanker,21.0,CHERRY GALAXY,,,,,,
+Tug/40.wav,Tug,200.0,SEASPAN COMMANDER,,,,,,
+Tug/49.wav,Tug,190.0,SEASPAN EAGLE,,,,,,
+Tug/9.wav,Tug,203.0,MILLENNIUMSTAR,,,,,,

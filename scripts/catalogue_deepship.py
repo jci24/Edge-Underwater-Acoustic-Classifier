@@ -8,8 +8,9 @@ import subprocess
 from pathlib import Path
 
 
-DATASET_FOLDER = Path("data/raw/deepship")
-OUTPUT_FILE = Path("data/catalogues/deepship_recordings.csv")
+PROJECT_FOLDER = Path(__file__).resolve().parents[1]
+DATASET_FOLDER = PROJECT_FOLDER / "data/raw/deepship"
+OUTPUT_FILE = PROJECT_FOLDER / "data/catalogues/deepship_recordings.csv"
 
 
 def read_audio_info(audio_file):
@@ -27,6 +28,9 @@ def read_audio_info(audio_file):
 
     result = subprocess.run(command, capture_output=True, text=True, check=True)
     audio_info = json.loads(result.stdout)
+
+    if len(audio_info["streams"]) != 1:
+        raise ValueError(f"Expected one audio stream in {audio_file}")
 
     duration = float(audio_info["format"]["duration"])
     sample_rate = int(audio_info["streams"][0]["sample_rate"])
@@ -82,6 +86,9 @@ def main():
     source_metadata = read_source_metadata()
     audio_files = sorted(DATASET_FOLDER.glob("*/*.wav"))
     metadata_rows = []
+
+    if not audio_files:
+        raise SystemExit("No WAV files were found. Run download_deepship.py first.")
 
     for audio_file in audio_files:
         class_name = audio_file.parent.name

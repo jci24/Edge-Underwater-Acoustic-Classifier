@@ -8,7 +8,8 @@ from pathlib import Path
 
 GITHUB_REPOSITORY = "irfankamboh/DeepShip"
 GITHUB_BRANCH = "main"
-DOWNLOAD_FOLDER = Path("data/raw/deepship")
+PROJECT_FOLDER = Path(__file__).resolve().parents[1]
+DOWNLOAD_FOLDER = PROJECT_FOLDER / "data/raw/deepship"
 
 
 def is_dataset_file(file_path):
@@ -25,6 +26,7 @@ def is_dataset_file(file_path):
 def download_file(github_path, expected_size):
     """Download one file, unless a complete copy already exists."""
     local_file = DOWNLOAD_FOLDER / github_path
+    temporary_file = local_file.with_suffix(local_file.suffix + ".part")
 
     if local_file.is_file() and local_file.stat().st_size == expected_size:
         print(f"Skip: {github_path}")
@@ -38,10 +40,13 @@ def download_file(github_path, expected_size):
     )
 
     print(f"Download: {github_path}")
-    urllib.request.urlretrieve(download_url, local_file)
+    urllib.request.urlretrieve(download_url, temporary_file)
 
-    if local_file.stat().st_size != expected_size:
+    if temporary_file.stat().st_size != expected_size:
+        temporary_file.unlink()
         raise RuntimeError(f"The download is incomplete: {github_path}")
+
+    temporary_file.replace(local_file)
 
 
 def main():
@@ -56,6 +61,9 @@ def main():
 
     with urllib.request.urlopen(request) as response:
         github_data = json.load(response)
+
+    if github_data.get("truncated"):
+        raise SystemExit("GitHub returned an incomplete file list. Try again later.")
 
     dataset_files = []
 
@@ -79,7 +87,11 @@ def main():
             audio_file_count += 1
             total_audio_bytes += file_size
 
+    source_commit_file = DOWNLOAD_FOLDER / "source_commit.txt"
+    source_commit_file.write_text(github_data["sha"] + "\n", encoding="utf-8")
+
     print(f"Ready: {audio_file_count} WAV files ({total_audio_bytes:,} bytes)")
+    print(f"Source commit: {github_data['sha']}")
 
 
 if __name__ == "__main__":

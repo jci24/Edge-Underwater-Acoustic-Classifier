@@ -11,6 +11,25 @@ four commercial ship classes. The GitHub repository contains only a public
 subset; its README directs users to request the remaining recordings from the
 dataset author.
 
+## Setup
+
+Create a local environment and install the Python dependencies:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
+```
+
+Install FFmpeg separately if `ffprobe` and `ffplay` are not available. On
+macOS:
+
+```bash
+brew install ffmpeg
+```
+
+## Dataset workflow
+
 Download the public files:
 
 ```bash
@@ -35,12 +54,13 @@ catalogue command creates:
   and a derived session identifier when date and time metadata are available.
 
 Both commands are safe to rerun. Existing downloads are skipped only when their
-sizes match the upstream file list.
+sizes match the upstream file list. The downloader follows the upstream `main`
+branch and records the exact revision in
+`data/raw/deepship/source_commit.txt`.
 
 Plot the number of files, total duration, and unique vessels in each class:
 
 ```bash
-python3 -m pip install pandas matplotlib
 python3 scripts/plot_class_distribution.py
 ```
 
@@ -48,20 +68,49 @@ The generated plot is saved to
 `data/plots/deepship_class_distribution.png` and is excluded from Git because
 it can be recreated from the catalogue.
 
+In the plot, a source group means one unique vessel name within a class. It is
+not an independently verified recording session.
+
+## Listening annotations
+
+Create a reproducible listening sample with three recordings from each class:
+
+```bash
+python3 scripts/create_listening_sample.py
+```
+
+This creates
+`data/annotations/deepship_listening_annotations.csv`. The script refuses to
+overwrite an existing file so that manual notes are not lost. Listen to an
+entry with:
+
+```bash
+ffplay -nodisp -autoexit data/raw/deepship/Cargo/103.wav
+```
+
+Use consistent labels such as:
+
+- `noise_present`: `yes`, `no`, or `uncertain`
+- `vessel_audibility`: `clear`, `partly_masked`, `weak`, or `not_obvious`
+- `confidence`: `high`, `medium`, or `low`
+
+Write observations rather than inferred mechanical causes. For example,
+“steady low-frequency tone with intermittent broadband bursts” is appropriate;
+an unsupported diagnosis of a damaged component is not.
+
 ## Dataset access and interpretation
 
-The upstream metafiles do not provide column headers. This project therefore
-preserves their fields conservatively as `source_field_2` through
-`source_field_7`; the vessel name, date, and time aliases are included because
-their formats and values make those interpretations clear. Do not treat the
-remaining fields as defined physical quantities without a primary source.
+The upstream metafiles do not provide column headers. This project uses only
+the fields whose formats and values clearly support the vessel-name, date, and
+time interpretations. Do not treat the other source fields as defined physical
+quantities without a primary source.
 
 The full dataset is not downloadable from the linked GitHub repository. Follow
 the access instruction in the
 [upstream README](https://github.com/irfankamboh/DeepShip/blob/main/README.txt)
 to request it from the author.
 
-No licence file is present in the upstream repository at the revision recorded
-in the generated catalogue. Confirm the dataset terms with the author before
+No licence file was present in the upstream repository when this workflow was
+created. Confirm the current dataset terms with the author before
 redistributing the recordings or using them beyond research permitted by the
 applicable terms.
