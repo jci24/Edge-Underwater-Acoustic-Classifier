@@ -128,6 +128,23 @@ every tensor to its source file and half-open time interval. See
 [the preprocessing specification](docs/preprocessing.md) for the complete
 configuration, split policy, and normalization behavior.
 
+## Hand-engineered baseline
+
+Extract the fixed 73-feature representation, train the primary logistic
+regression and secondary random forest, then validate every artifact:
+
+```bash
+python3 scripts/extract_handcrafted_features.py
+MPLBACKEND=Agg python3 scripts/train_handcrafted_baselines.py
+python3 scripts/validate_handcrafted_baseline.py
+```
+
+The committed results include window- and source-level metrics, per-class
+support, fixed confusion matrices, model inspection tables, and separate
+feature-extraction, classifier-inference, end-to-end latency, and model-size
+measurements. See
+[the baseline specification and limits](docs/handcrafted_baseline.md).
+
 ## Dataset access and interpretation
 
 The upstream metafiles do not provide column headers. This project uses only

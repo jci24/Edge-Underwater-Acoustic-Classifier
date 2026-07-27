@@ -1,6 +1,9 @@
 # Downloaded datasets are reproducible and too large for Git.
 data/raw/
 
+# Trained models are reproducible binary artifacts.
+artifacts/models/
+
 # Generated plots can be recreated from the catalogue.
 data/plots/
 
@@ -12,3 +15,6 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 *.egg-info/
+
+# macOS Finder metadata.
+.DS_Store

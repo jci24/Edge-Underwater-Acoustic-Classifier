@@ -1,0 +1,14 @@
+{
+  "window_count": 1118,
+  "feature_count": 73,
+  "total_extraction_seconds": 9.035355500003789,
+  "seconds_per_window": 0.008081713327373693,
+  "measurement_note": "Warm-cache development-machine extraction; not edge-device performance.",
+  "environment": {
+    "python": "3.14.6",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "torch": "2.10.0"
+  },
+  "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+  "feature_config_hash": "838bd57414836a11dc7888daa17a162ab47b4f4dddc693d9d573eb85f4a5f8d3"
+}

@@ -1,0 +1,407 @@
+{
+  "primary_metric": "test window-level macro F1",
+  "models": {
+    "logistic_regression": {
+      "role": "primary",
+      "selected_C": 1.0,
+      "validation_candidates": [
+        {
+          "C": 0.01,
+          "validation_macro_f1": 0.3603327411625221
+        },
+        {
+          "C": 0.1,
+          "validation_macro_f1": 0.3604951787443682
+        },
+        {
+          "C": 1.0,
+          "validation_macro_f1": 0.36432976306394027
+        },
+        {
+          "C": 10.0,
+          "validation_macro_f1": 0.3546147978642258
+        }
+      ],
+      "window_test": {
+        "macro_f1": 0.28320179889009983,
+        "accuracy": 0.3925925925925926,
+        "per_class": {
+          "Cargo": {
+            "precision": 0.375,
+            "recall": 0.08108108108108109,
+            "f1": 0.13333333333333333,
+            "support": 37
+          },
+          "Passengership": {
+            "precision": 0.547945205479452,
+            "recall": 0.8888888888888888,
+            "f1": 0.6779661016949152,
+            "support": 45
+          },
+          "Tanker": {
+            "precision": 0.16981132075471697,
+            "recall": 0.6923076923076923,
+            "f1": 0.2727272727272727,
+            "support": 13
+          },
+          "Tug": {
+            "precision": 1.0,
+            "recall": 0.025,
+            "f1": 0.04878048780487805,
+            "support": 40
+          }
+        },
+        "confusion_matrix": [
+          [
+            3,
+            0,
+            34,
+            0
+          ],
+          [
+            4,
+            40,
+            1,
+            0
+          ],
+          [
+            1,
+            3,
+            9,
+            0
+          ],
+          [
+            0,
+            30,
+            9,
+            1
+          ]
+        ]
+      },
+      "source_test_secondary": {
+        "macro_f1": 0.2875,
+        "accuracy": 0.5,
+        "per_class": {
+          "Cargo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          },
+          "Passengership": {
+            "precision": 0.6,
+            "recall": 1.0,
+            "f1": 0.75,
+            "support": 3
+          },
+          "Tanker": {
+            "precision": 0.5,
+            "recall": 0.3333333333333333,
+            "f1": 0.4,
+            "support": 3
+          },
+          "Tug": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0
+          ]
+        ]
+      },
+      "model_size_bytes": 7945
+    },
+    "random_forest": {
+      "role": "secondary",
+      "window_test": {
+        "macro_f1": 0.16660161332292478,
+        "accuracy": 0.1925925925925926,
+        "per_class": {
+          "Cargo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 37
+          },
+          "Passengership": {
+            "precision": 0.9375,
+            "recall": 0.3333333333333333,
+            "f1": 0.4918032786885246,
+            "support": 45
+          },
+          "Tanker": {
+            "precision": 0.09734513274336283,
+            "recall": 0.8461538461538461,
+            "f1": 0.1746031746031746,
+            "support": 13
+          },
+          "Tug": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 40
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            37,
+            0
+          ],
+          [
+            4,
+            15,
+            26,
+            0
+          ],
+          [
+            2,
+            0,
+            11,
+            0
+          ],
+          [
+            0,
+            1,
+            39,
+            0
+          ]
+        ]
+      },
+      "source_test_secondary": {
+        "macro_f1": 0.2361111111111111,
+        "accuracy": 0.375,
+        "per_class": {
+          "Cargo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          },
+          "Passengership": {
+            "precision": 1.0,
+            "recall": 0.3333333333333333,
+            "f1": 0.5,
+            "support": 3
+          },
+          "Tanker": {
+            "precision": 0.3333333333333333,
+            "recall": 0.6666666666666666,
+            "f1": 0.4444444444444444,
+            "support": 3
+          },
+          "Tug": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 1
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            2,
+            0
+          ],
+          [
+            1,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ]
+      },
+      "model_size_bytes": 5580562
+    }
+  },
+  "support_by_split": [
+    {
+      "split": "test",
+      "class": "Cargo",
+      "windows": 37,
+      "source_files": 1,
+      "vessel_groups": 1
+    },
+    {
+      "split": "test",
+      "class": "Passengership",
+      "windows": 45,
+      "source_files": 3,
+      "vessel_groups": 1
+    },
+    {
+      "split": "test",
+      "class": "Tanker",
+      "windows": 13,
+      "source_files": 3,
+      "vessel_groups": 3
+    },
+    {
+      "split": "test",
+      "class": "Tug",
+      "windows": 40,
+      "source_files": 1,
+      "vessel_groups": 1
+    },
+    {
+      "split": "train",
+      "class": "Cargo",
+      "windows": 345,
+      "source_files": 9,
+      "vessel_groups": 7
+    },
+    {
+      "split": "train",
+      "class": "Passengership",
+      "windows": 167,
+      "source_files": 15,
+      "vessel_groups": 8
+    },
+    {
+      "split": "train",
+      "class": "Tanker",
+      "windows": 279,
+      "source_files": 22,
+      "vessel_groups": 13
+    },
+    {
+      "split": "train",
+      "class": "Tug",
+      "windows": 38,
+      "source_files": 1,
+      "vessel_groups": 1
+    },
+    {
+      "split": "validation",
+      "class": "Cargo",
+      "windows": 77,
+      "source_files": 2,
+      "vessel_groups": 2
+    },
+    {
+      "split": "validation",
+      "class": "Passengership",
+      "windows": 9,
+      "source_files": 2,
+      "vessel_groups": 2
+    },
+    {
+      "split": "validation",
+      "class": "Tanker",
+      "windows": 28,
+      "source_files": 3,
+      "vessel_groups": 3
+    },
+    {
+      "split": "validation",
+      "class": "Tug",
+      "windows": 40,
+      "source_files": 1,
+      "vessel_groups": 1
+    }
+  ],
+  "timing": {
+    "measurement_note": "Warm-cache Mac development-machine measurements with one thread and batch size one; not target-edge-device performance.",
+    "feature_table_extraction": {
+      "window_count": 1118,
+      "feature_count": 73,
+      "total_extraction_seconds": 9.035355500003789,
+      "seconds_per_window": 0.008081713327373693,
+      "measurement_note": "Warm-cache development-machine extraction; not edge-device performance.",
+      "environment": {
+        "python": "3.14.6",
+        "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+        "torch": "2.10.0"
+      },
+      "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+      "feature_config_hash": "838bd57414836a11dc7888daa17a162ab47b4f4dddc693d9d573eb85f4a5f8d3"
+    },
+    "decode_and_feature": {
+      "median_ms": 7.183625013567507,
+      "p95_ms": 12.712075101444498,
+      "total_seconds": 1.0238032502820715,
+      "call_count": 135
+    },
+    "logistic_regression_inference": {
+      "median_ms": 0.8159999852068722,
+      "p95_ms": 1.1478982836706564,
+      "total_seconds": 0.8664378657704219,
+      "call_count": 1000
+    },
+    "random_forest_inference": {
+      "median_ms": 14.156000514049083,
+      "p95_ms": 20.025295804953203,
+      "total_seconds": 15.599672090495005,
+      "call_count": 1000
+    },
+    "logistic_regression_end_to_end": {
+      "median_ms": 8.13029200071469,
+      "p95_ms": 11.046395794255659,
+      "total_seconds": 1.1061262929579243,
+      "call_count": 135
+    },
+    "random_forest_end_to_end": {
+      "median_ms": 20.35445801448077,
+      "p95_ms": 23.141353676328436,
+      "total_seconds": 2.7739548331010155,
+      "call_count": 135
+    }
+  },
+  "environment": {
+    "python": "3.14.6",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "processor": "arm",
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "scikit_learn": "1.9.0",
+    "torch": "2.10.0",
+    "thread_count": 1,
+    "inference_batch_size": 1
+  },
+  "reporting_limits": [
+    "Windows within recordings and vessels are correlated.",
+    "The public test split has only one Cargo, Passengership, and Tug vessel group.",
+    "Results do not generalize to the full 47-hour DeepShip dataset."
+  ],
+  "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+  "feature_config_hash": "838bd57414836a11dc7888daa17a162ab47b4f4dddc693d9d573eb85f4a5f8d3"
+}
