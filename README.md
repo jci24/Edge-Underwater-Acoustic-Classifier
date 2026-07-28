@@ -215,6 +215,20 @@ validation evidence without using test results. Generated ONNX files remain
 ignored; versioned results live under `reports/milestone6/`. See
 [the ONNX parity and quantization procedure](docs/onnx_quantization.md).
 
+## Two-page technical teardown
+
+Build and validate the evidence-driven engineering teardown:
+
+```bash
+python3 -m pip install -e '.[docs,test]'
+python3 scripts/build_technical_teardown.py
+python3 scripts/validate_technical_teardown.py
+```
+
+The committed two-page A4 PDF summarizes the implemented system, baseline/CNN
+evidence, edge measurements, proposed near-sensor architecture, and remaining
+deployment risks. See [the regeneration and visual-QA guide](docs/technical_teardown.md).
+
 ## Dataset access and interpretation
 
 The upstream metafiles do not provide column headers. This project uses only

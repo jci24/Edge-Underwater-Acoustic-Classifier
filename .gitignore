@@ -7,6 +7,9 @@ artifacts/models/
 # Generated plots can be recreated from the catalogue.
 data/plots/
 
+# Temporary PDF renders and visual-QA previews.
+tmp/pdfs/
+
 # Local Python environments.
 .venv/
 
