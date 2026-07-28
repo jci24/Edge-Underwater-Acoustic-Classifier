@@ -199,6 +199,22 @@ PyTorch and ONNX model files remain ignored, while raw measurements, memory
 evidence, plots, metrics, and the report are versioned. See
 [the edge-performance procedure](docs/edge_performance.md).
 
+## ONNX parity and quantization
+
+Regenerate the fixed FP32 export, calibrate and evaluate the two INT8
+experiments, then validate the complete study:
+
+```bash
+MPLBACKEND=Agg python3 scripts/run_onnx_quantization_study.py
+python3 scripts/validate_onnx_quantization.py
+```
+
+The FP32 parity check covers all reused-test windows. Static INT8 calibration
+uses training windows only, and the deployment recommendation is selected from
+validation evidence without using test results. Generated ONNX files remain
+ignored; versioned results live under `reports/milestone6/`. See
+[the ONNX parity and quantization procedure](docs/onnx_quantization.md).
+
 ## Dataset access and interpretation
 
 The upstream metafiles do not provide column headers. This project uses only

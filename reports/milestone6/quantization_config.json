@@ -1,0 +1,46 @@
+{
+  "source_checkpoint": "artifacts/models/imbalance/class_vessel_balanced_sampling.pt",
+  "source_checkpoint_sha256": "5d2b629284c88a17e1a2753f032c3596ab4ee3182c0279241acbc287c1f29787",
+  "preprocessing_config_hash": "a096d5adb0f3e91e4b529c2a1eab4104386318f9825cc05a39470d410e2f4cba",
+  "model_config_hash": "fe3fa0ec6d4ab4bdf8bb33242147c2547dcc59c7f9525d2f700881900b5ebf22",
+  "training_config_hash": "fc70fa97ad9017c9013c0a853d00430259d366fdb4824322c286a5a2d0c5bfad",
+  "selected_run_config_hash": "f845cc556495364c85b79c8790c569b5680fee8eba3991016a653d1ac788c83c",
+  "input_shape": [
+    1,
+    1,
+    64,
+    155
+  ],
+  "output_shape": [
+    1,
+    4
+  ],
+  "onnx_opset": 18,
+  "absolute_tolerance": 0.0001,
+  "relative_tolerance": 0.0001,
+  "normalization": "per_example",
+  "calibration_split": "train",
+  "calibration_window_count": 829,
+  "calibration_method": "MinMax",
+  "static_quant_format": "QDQ",
+  "static_activation_type": "QInt8",
+  "static_weight_type": "QInt8",
+  "static_per_channel": true,
+  "dynamic_weight_type": "QInt8",
+  "dynamic_operators": [
+    "Gemm",
+    "MatMul"
+  ],
+  "static_operators": [
+    "Conv",
+    "Gemm",
+    "MatMul"
+  ],
+  "warmup_calls": 50,
+  "measured_calls": 1000,
+  "intra_op_threads": 1,
+  "maximum_macro_f1_loss": 0.01,
+  "maximum_per_class_recall_loss": 0.05,
+  "maximum_p99_latency_increase_ratio": 0.05,
+  "config_hash": "935877e3663614a8a496524a8180ccf481d278122146f47661335a05f816c46f"
+}

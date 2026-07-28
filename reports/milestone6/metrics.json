@@ -1,0 +1,658 @@
+{
+  "quantization_config_hash": "935877e3663614a8a496524a8180ccf481d278122146f47661335a05f816c46f",
+  "selected_strategy": "class_vessel_balanced_sampling",
+  "fp32_pytorch_parity": {
+    "window_count": 135,
+    "maximum_absolute_error": 9.5367431640625e-07,
+    "absolute_tolerance": 0.0001,
+    "relative_tolerance": 0.0001,
+    "matching_prediction_count": 135,
+    "all_predictions_match": true
+  },
+  "calibration": {
+    "window_count": 829,
+    "unique_window_count": 829,
+    "classes": [
+      "Cargo",
+      "Passengership",
+      "Tanker",
+      "Tug"
+    ],
+    "vessel_group_count": 29,
+    "split": "train"
+  },
+  "graphs": {
+    "fp32": {
+      "checker_valid": true,
+      "input_name": "features",
+      "output_name": "logits",
+      "input_shape": [
+        1,
+        1,
+        64,
+        155
+      ],
+      "output_shape": [
+        1,
+        4
+      ],
+      "operator_counts": {
+        "Conv": 3,
+        "Relu": 3,
+        "MaxPool": 3,
+        "ReduceMean": 1,
+        "Reshape": 1,
+        "Gemm": 1
+      },
+      "initializer_count": 10
+    },
+    "dynamic_int8": {
+      "checker_valid": true,
+      "input_name": "features",
+      "output_name": "logits",
+      "input_shape": [
+        1,
+        1,
+        64,
+        155
+      ],
+      "output_shape": [
+        1,
+        4
+      ],
+      "operator_counts": {
+        "Conv": 3,
+        "Relu": 3,
+        "MaxPool": 3,
+        "ReduceMean": 1,
+        "Reshape": 1,
+        "DynamicQuantizeLinear": 1,
+        "Mul": 2,
+        "MatMulInteger": 1,
+        "Cast": 1,
+        "Add": 1
+      },
+      "initializer_count": 12
+    },
+    "static_int8": {
+      "checker_valid": true,
+      "input_name": "features",
+      "output_name": "logits",
+      "input_shape": [
+        1,
+        1,
+        64,
+        155
+      ],
+      "output_shape": [
+        1,
+        4
+      ],
+      "operator_counts": {
+        "DequantizeLinear": 16,
+        "QuantizeLinear": 8,
+        "Conv": 3,
+        "Relu": 3,
+        "MaxPool": 3,
+        "ReduceMean": 1,
+        "Reshape": 1,
+        "Gemm": 1
+      },
+      "initializer_count": 42
+    }
+  },
+  "model_files": {
+    "fp32": {
+      "path": "artifacts/models/onnx/small_cnn_fp32.onnx",
+      "size_bytes": 116187,
+      "sha256": "36a5212460ebdc976bf91dec5632b89e75b06260cb6debbce265de5579375034"
+    },
+    "dynamic_int8": {
+      "path": "artifacts/models/onnx/small_cnn_dynamic_int8.onnx",
+      "size_bytes": 114138,
+      "sha256": "a6f0888f1025c9f8f91918ade88cb5dc819174a0b4cc1dd8db8134d88be59320"
+    },
+    "static_int8": {
+      "path": "artifacts/models/onnx/small_cnn_static_int8.onnx",
+      "size_bytes": 51877,
+      "sha256": "df84ce4fd1d93ca705ba3806eee8fc8c25112b74c34846c858e0e961eebf088d"
+    }
+  },
+  "comparison": [
+    {
+      "variant": "fp32",
+      "size_bytes": 116187,
+      "size_reduction_bytes": 0,
+      "size_reduction_ratio": 0.0,
+      "timing": {
+        "call_count": 1000,
+        "median_ms": 0.6964585000000001,
+        "p95_ms": 0.7687514499999999,
+        "p99_ms": 0.8363758299999999,
+        "total_seconds": 0.7090277429999999
+      },
+      "validation_metrics": {
+        "macro_f1": 0.3960169418085705,
+        "accuracy": 0.42857142857142855,
+        "per_class": {
+          "Cargo": {
+            "precision": 0.6125,
+            "recall": 0.6363636363636364,
+            "f1": 0.6242038216560509,
+            "support": 77
+          },
+          "Passengership": {
+            "precision": 1.0,
+            "recall": 0.3333333333333333,
+            "f1": 0.5,
+            "support": 9
+          },
+          "Tanker": {
+            "precision": 0.0967741935483871,
+            "recall": 0.21428571428571427,
+            "f1": 0.13333333333333333,
+            "support": 28
+          },
+          "Tug": {
+            "precision": 0.8888888888888888,
+            "recall": 0.2,
+            "f1": 0.32653061224489793,
+            "support": 40
+          }
+        },
+        "confusion_matrix": [
+          [
+            49,
+            0,
+            28,
+            0
+          ],
+          [
+            5,
+            3,
+            0,
+            1
+          ],
+          [
+            22,
+            0,
+            6,
+            0
+          ],
+          [
+            4,
+            0,
+            28,
+            8
+          ]
+        ]
+      },
+      "test_metrics": {
+        "macro_f1": 0.03146853146853147,
+        "accuracy": 0.06666666666666667,
+        "per_class": {
+          "Cargo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 37
+          },
+          "Passengership": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 45
+          },
+          "Tanker": {
+            "precision": 0.06923076923076923,
+            "recall": 0.6923076923076923,
+            "f1": 0.1258741258741259,
+            "support": 13
+          },
+          "Tug": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 40
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            37,
+            0
+          ],
+          [
+            0,
+            0,
+            45,
+            0
+          ],
+          [
+            4,
+            0,
+            9,
+            0
+          ],
+          [
+            1,
+            0,
+            39,
+            0
+          ]
+        ]
+      },
+      "validation_vs_fp32": {
+        "window_count": 154,
+        "matching_prediction_count": 154,
+        "prediction_agreement": 1.0,
+        "mean_absolute_logit_error": 0.0,
+        "maximum_absolute_logit_error": 0.0
+      },
+      "test_vs_fp32": {
+        "window_count": 135,
+        "matching_prediction_count": 135,
+        "prediction_agreement": 1.0,
+        "mean_absolute_logit_error": 0.0,
+        "maximum_absolute_logit_error": 0.0
+      },
+      "qualification": {
+        "qualifies": true,
+        "baseline": true,
+        "macro_f1_pass": true,
+        "per_class_recall_pass": true,
+        "latency_pass": true,
+        "size_pass": false
+      }
+    },
+    {
+      "variant": "dynamic_int8",
+      "size_bytes": 114138,
+      "size_reduction_bytes": 2049,
+      "size_reduction_ratio": 0.017635363680962586,
+      "timing": {
+        "call_count": 1000,
+        "median_ms": 0.7083539999999999,
+        "p95_ms": 0.80331605,
+        "p99_ms": 0.8897124099999999,
+        "total_seconds": 0.72196255
+      },
+      "validation_metrics": {
+        "macro_f1": 0.3960169418085705,
+        "accuracy": 0.42857142857142855,
+        "per_class": {
+          "Cargo": {
+            "precision": 0.6125,
+            "recall": 0.6363636363636364,
+            "f1": 0.6242038216560509,
+            "support": 77
+          },
+          "Passengership": {
+            "precision": 1.0,
+            "recall": 0.3333333333333333,
+            "f1": 0.5,
+            "support": 9
+          },
+          "Tanker": {
+            "precision": 0.0967741935483871,
+            "recall": 0.21428571428571427,
+            "f1": 0.13333333333333333,
+            "support": 28
+          },
+          "Tug": {
+            "precision": 0.8888888888888888,
+            "recall": 0.2,
+            "f1": 0.32653061224489793,
+            "support": 40
+          }
+        },
+        "confusion_matrix": [
+          [
+            49,
+            0,
+            28,
+            0
+          ],
+          [
+            5,
+            3,
+            0,
+            1
+          ],
+          [
+            22,
+            0,
+            6,
+            0
+          ],
+          [
+            4,
+            0,
+            28,
+            8
+          ]
+        ]
+      },
+      "test_metrics": {
+        "macro_f1": 0.03146853146853147,
+        "accuracy": 0.06666666666666667,
+        "per_class": {
+          "Cargo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 37
+          },
+          "Passengership": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 45
+          },
+          "Tanker": {
+            "precision": 0.06923076923076923,
+            "recall": 0.6923076923076923,
+            "f1": 0.1258741258741259,
+            "support": 13
+          },
+          "Tug": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 40
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            37,
+            0
+          ],
+          [
+            0,
+            0,
+            45,
+            0
+          ],
+          [
+            4,
+            0,
+            9,
+            0
+          ],
+          [
+            1,
+            0,
+            39,
+            0
+          ]
+        ]
+      },
+      "validation_vs_fp32": {
+        "window_count": 154,
+        "matching_prediction_count": 154,
+        "prediction_agreement": 1.0,
+        "mean_absolute_logit_error": 0.0018447278998792171,
+        "maximum_absolute_logit_error": 0.00533294677734375
+      },
+      "test_vs_fp32": {
+        "window_count": 135,
+        "matching_prediction_count": 135,
+        "prediction_agreement": 1.0,
+        "mean_absolute_logit_error": 0.002040916122496128,
+        "maximum_absolute_logit_error": 0.006145954132080078
+      },
+      "qualification": {
+        "macro_f1_loss": 0.0,
+        "maximum_recall_loss": 0.0,
+        "recall_loss_by_class": {
+          "Cargo": 0.0,
+          "Passengership": 0.0,
+          "Tanker": 0.0,
+          "Tug": 0.0
+        },
+        "p99_latency_increase_ratio": 0.06377106808550406,
+        "size_reduction_bytes": 2049,
+        "macro_f1_pass": true,
+        "per_class_recall_pass": true,
+        "latency_pass": false,
+        "size_pass": true,
+        "qualifies": false
+      }
+    },
+    {
+      "variant": "static_int8",
+      "size_bytes": 51877,
+      "size_reduction_bytes": 64310,
+      "size_reduction_ratio": 0.553504264676771,
+      "timing": {
+        "call_count": 1000,
+        "median_ms": 0.45670849999999996,
+        "p95_ms": 0.5322559,
+        "p99_ms": 0.6252776699999999,
+        "total_seconds": 0.476494875
+      },
+      "validation_metrics": {
+        "macro_f1": 0.37100571181412817,
+        "accuracy": 0.44805194805194803,
+        "per_class": {
+          "Cargo": {
+            "precision": 0.6235294117647059,
+            "recall": 0.6883116883116883,
+            "f1": 0.654320987654321,
+            "support": 77
+          },
+          "Passengership": {
+            "precision": 1.0,
+            "recall": 0.2222222222222222,
+            "f1": 0.36363636363636365,
+            "support": 9
+          },
+          "Tanker": {
+            "precision": 0.10344827586206896,
+            "recall": 0.21428571428571427,
+            "f1": 0.13953488372093023,
+            "support": 28
+          },
+          "Tug": {
+            "precision": 0.8888888888888888,
+            "recall": 0.2,
+            "f1": 0.32653061224489793,
+            "support": 40
+          }
+        },
+        "confusion_matrix": [
+          [
+            53,
+            0,
+            24,
+            0
+          ],
+          [
+            6,
+            2,
+            0,
+            1
+          ],
+          [
+            22,
+            0,
+            6,
+            0
+          ],
+          [
+            4,
+            0,
+            28,
+            8
+          ]
+        ]
+      },
+      "test_metrics": {
+        "macro_f1": 0.03146853146853147,
+        "accuracy": 0.06666666666666667,
+        "per_class": {
+          "Cargo": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 37
+          },
+          "Passengership": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 45
+          },
+          "Tanker": {
+            "precision": 0.06923076923076923,
+            "recall": 0.6923076923076923,
+            "f1": 0.1258741258741259,
+            "support": 13
+          },
+          "Tug": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 40
+          }
+        },
+        "confusion_matrix": [
+          [
+            0,
+            0,
+            37,
+            0
+          ],
+          [
+            0,
+            0,
+            45,
+            0
+          ],
+          [
+            4,
+            0,
+            9,
+            0
+          ],
+          [
+            1,
+            0,
+            39,
+            0
+          ]
+        ]
+      },
+      "validation_vs_fp32": {
+        "window_count": 154,
+        "matching_prediction_count": 149,
+        "prediction_agreement": 0.9675324675324676,
+        "mean_absolute_logit_error": 0.007372444495558739,
+        "maximum_absolute_logit_error": 0.02783304452896118
+      },
+      "test_vs_fp32": {
+        "window_count": 135,
+        "matching_prediction_count": 135,
+        "prediction_agreement": 1.0,
+        "mean_absolute_logit_error": 0.007090437225997448,
+        "maximum_absolute_logit_error": 0.022990703582763672
+      },
+      "qualification": {
+        "macro_f1_loss": 0.02501122999444233,
+        "maximum_recall_loss": 0.1111111111111111,
+        "recall_loss_by_class": {
+          "Cargo": -0.051948051948051965,
+          "Passengership": 0.1111111111111111,
+          "Tanker": 0.0,
+          "Tug": 0.0
+        },
+        "p99_latency_increase_ratio": -0.2523962941396813,
+        "size_reduction_bytes": 64310,
+        "macro_f1_pass": false,
+        "per_class_recall_pass": false,
+        "latency_pass": true,
+        "size_pass": true,
+        "qualifies": false
+      }
+    }
+  ],
+  "recommended_variant": "fp32",
+  "selection_split": "validation",
+  "recommended_test_metrics": {
+    "macro_f1": 0.03146853146853147,
+    "accuracy": 0.06666666666666667,
+    "per_class": {
+      "Cargo": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 37
+      },
+      "Passengership": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 45
+      },
+      "Tanker": {
+        "precision": 0.06923076923076923,
+        "recall": 0.6923076923076923,
+        "f1": 0.1258741258741259,
+        "support": 13
+      },
+      "Tug": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 40
+      }
+    },
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        37,
+        0
+      ],
+      [
+        0,
+        0,
+        45,
+        0
+      ],
+      [
+        4,
+        0,
+        9,
+        0
+      ],
+      [
+        1,
+        0,
+        39,
+        0
+      ]
+    ]
+  },
+  "test_reuse_disclosure": "The test split was evaluated in earlier milestones and is not a pristine confirmatory set.",
+  "environment": {
+    "python": "3.14.6",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "versions": {
+      "numpy": "2.5.1",
+      "torch": "2.10.0",
+      "torchaudio": "2.10.0",
+      "torchcodec": "0.10.0",
+      "onnx": "1.22.0",
+      "onnxruntime": "1.27.0",
+      "onnxscript": "0.7.1"
+    },
+    "provider": "CPUExecutionProvider",
+    "intra_op_threads": 1,
+    "execution_mode": "sequential"
+  }
+}
